@@ -142,13 +142,23 @@
                     opacity: .8;
                 }
             }
+            #no {
+                /* background: #999; */
+                /* color: white; */
+                /* position: absolute; */
+                /* left: 55%;
+                top: 50%; */
+                /* transform: translate(-50%, -50%); */
+                /* transition: left 0.25s ease, top 0.25s ease; */
+                z-index: 50;
+            }
         </style>
     </head>
     <body>
         <div class="box">
             <h1>Will you be my Valentine, Nyaw? ❤️</h1>
             <button id="yes">Yes 💖</button>
-            <button id="no">No 😝</button>
+            <button id="no">No 😭</button>
             <div id="gif">
                 <h2>You had no choice 😂💞</h2>
                 <div class="gif-container">
@@ -166,13 +176,33 @@
             const yesBtn = document.getElementById("yes");
             const gif = document.getElementById("gif");
             const music = document.getElementById("valentineMusic");
+            let noIsTeasing = false;
 
-            // NO button kabur seluruh layar
-            noBtn.addEventListener("mouseover", () => {
-                const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-                const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            function moveNoButton() {
+                const padding = 20;
+
+                const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+                const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+                const x = Math.random() * maxX;
+                const y = Math.random() * maxY;
+
                 noBtn.style.left = x + "px";
                 noBtn.style.top = y + "px";
+
+                // ganti emoji sekali saja
+                if (!noIsTeasing) {
+                    noBtn.innerHTML = "No 😝";
+                    noIsTeasing = true;
+                }
+            }
+            // desktop
+            noBtn.addEventListener("pointerenter", moveNoButton);
+
+            // mobile (sebelum click kejadian)
+            noBtn.addEventListener("touchstart", (e) => {
+                e.preventDefault(); // cegah click
+                moveNoButton();
             });
             // loop petals
             function spawnPetal() {
