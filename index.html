@@ -1,80 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Valentine?</title>
-    <style>
-      body {
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #ffe6eb;
-        font-family: Arial, sans-serif;
-      }
+    <head>
+        <meta charset="UTF-8">
+        <title>Be My Valentine?</title>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+        <style>
+            body {
+                height: 100vh;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: linear-gradient(135deg, #ffd6e8, #ffeef5);
+                font-family: "Poppins", sans-serif;
+                overflow: hidden;
+            }
 
-      .box {
-        text-align: center;
-      }
+            .box {
+                background: white;
+                padding: 40px 50px;
+                border-radius: 20px;
+                text-align: center;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, .1);
+                animation: pop .6s ease;
+                z-index: 2;
+            }
 
-      h1 {
-        color: #e6005c;
-      }
+            @keyframes pop {
+                from {
+                    transform: scale(.8);
+                    opacity: 0;
+                }
 
-      button {
-        padding: 10px 20px;
-        font-size: 18px;
-        margin: 15px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-      }
+                to {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
 
-      #yes {
-        background-color: #ff4d79;
-        color: white;
-      }
+            h1 {
+                color: #e6005c;
+                margin-bottom: 30px;
+            }
 
-      #no {
-        background-color: #999;
-        color: white;
-        position: absolute;
-      }
+            button {
+                padding: 12px 28px;
+                font-size: 18px;
+                border: none;
+                border-radius: 12px;
+                cursor: pointer;
+                transition: transform .2s;
+            }
 
-      #gif {
-        display: none;
-        margin-top: 20px;
-      }
+            button:hover {
+                transform: translateY(-2px);
+            }
 
-      img {
-        width: 250px;
-        border-radius: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="box">
-      <h1>Will you be my Valentine, Nyaw? ❤️</h1>
-      <button id="yes">Yes</button>
-      <button id="no">No</button>
-      <div id="gif">
-        <h2>You had no choice 😂💖</h2>
-        <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="Funny Gif">
-      </div>
-    </div>
-    <script>
-      const noButton = document.getElementById("no");
-      const yesButton = document.getElementById("yes");
-      const gifDiv = document.getElementById("gif");
-      noButton.addEventListener("mouseover", () => {
-        const x = Math.random() * (window.innerWidth - 100);
-        const y = Math.random() * (window.innerHeight - 50);
-        noButton.style.left = x + "px";
-        noButton.style.top = y + "px";
-      });
-      yesButton.addEventListener("click", () => {
-        gifDiv.style.display = "block";
-      });
-    </script>
-  </body>
+            #yes {
+                background: #ff4d79;
+                color: white;
+                margin-right: 20px;
+            }
+
+            #no {
+                background: #999;
+                color: white;
+                position: absolute;
+                z-index: 50;
+            }
+
+            #gif {
+                display: none;
+                margin-top: 30px;
+                animation: fadeIn .5s ease forwards;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            img {
+                width: 260px;
+                border-radius: 16px;
+                margin-top: 15px;
+            }
+
+            .love {
+                position: fixed;
+                font-size: 18px;
+                pointer-events: none;
+                animation: floatUp 2s ease forwards;
+            }
+
+            .gif-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 15px;
+                margin-top: 20px;
+            }
+
+            .gif-container img {
+                width: 100%;
+                border-radius: 14px;
+            }
+
+            @keyframes floatUp {
+                from {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                to {
+                    opacity: 0;
+                    transform: translateY(-120px);
+                }
+            }
+
+            .petal {
+                position: fixed;
+                font-size: 22px;
+                pointer-events: none;
+                animation: fall linear forwards;
+            }
+
+            @keyframes fall {
+                from {
+                    transform: translateY(-40px) rotate(0deg);
+                    opacity: 1;
+                }
+
+                to {
+                    transform: translateY(110vh) rotate(360deg);
+                    opacity: .8;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <h1>Will you be my Valentine, Nyaw? ❤️</h1>
+            <button id="yes">Yes 💖</button>
+            <button id="no">No 😝</button>
+            <div id="gif">
+                <h2>You had no choice 😂💞</h2>
+                <div class="gif-container">
+                    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3emVlYzgxcHZ3Zm0xcmJiZThpYjkwYTNtN2o3OW11bmF1dXE0NGN4aSZlcD12MV9naWZzX3RyZW5kaW5nJmN0PWc/ynRrAHj5SWAu8RA002/giphy.gif">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3emVlYzgxcHZ3Zm0xcmJiZThpYjkwYTNtN2o3OW11bmF1dXE0NGN4aSZlcD12MV9naWZzX3RyZW5kaW5nJmN0PWc/OfkGZ5H2H3f8Y/giphy.gif">
+                </div>
+            </div>
+        </div>
+        <audio id="valentineMusic" loop>
+            <source src="/home/ubuntu/George_Micheal_-_Careless_Whisper.mp3" type="audio/mpeg">
+        </audio>
+        <script>
+            const noBtn = document.getElementById("no");
+            const yesBtn = document.getElementById("yes");
+            const gif = document.getElementById("gif");
+            const music = document.getElementById("valentineMusic");
+
+            // NO button kabur seluruh layar
+            noBtn.addEventListener("mouseover", () => {
+                const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+                const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+                noBtn.style.left = x + "px";
+                noBtn.style.top = y + "px";
+            });
+            // loop petals
+            function spawnPetal() {
+                const petal = document.createElement("div");
+                petal.className = "petal";
+                petal.innerText = "🌸";
+                petal.style.left = Math.random() * window.innerWidth + "px";
+                petal.style.animationDuration = 4 + Math.random() * 4 + "s";
+                document.body.appendChild(petal);
+                setTimeout(() => petal.remove(), 8000);
+            }
+            // loop love
+            function spawnLove() {
+                const love = document.createElement("div");
+                love.className = "love";
+                love.innerText = "❤️";
+                love.style.left = Math.random() * window.innerWidth + "px";
+                love.style.top = window.innerHeight - 40 + "px";
+                love.style.fontSize = 14 + Math.random() * 26 + "px";
+                document.body.appendChild(love);
+                setTimeout(() => love.remove(), 2000);
+            }
+            let effectsStarted = false;
+            yesBtn.addEventListener("click", () => {
+                gif.style.display = "block";
+
+                // PLAY MUSIC (AUTO)
+                music.volume = 0.4;
+                music.play();
+
+                if (!effectsStarted) {
+                    effectsStarted = true;
+                    setInterval(spawnPetal, 300);
+                    setInterval(spawnLove, 200);
+                }
+            });
+        </script>
+    </body>
 </html>
